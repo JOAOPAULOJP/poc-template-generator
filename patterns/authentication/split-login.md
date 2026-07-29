@@ -52,9 +52,23 @@ Typical elements:
 
 No interactive controls are allowed.
 
-
 ---
 
+## Official Components
+
+Compose this pattern using official Design System components.
+
+Typical composition:
+
+- GovBar
+- Card
+- Typography
+- InputText
+- InputPassword
+- Button
+- TextLink
+
+---
 
 ## Reference Implementation
 
@@ -72,9 +86,9 @@ Use it to understand the intended:
 - proportions;
 - visual balance.
 
-When the written guidelines and the reference image complement each other, consider both before making implementation decisions.
+If the reference image and this document appear to conflict, follow this document.
 
-Do not reproduce the reference image literally. Instead, preserve its visual intent while adapting the implementation to the project's content and the Design System.
+Do not reproduce the reference image literally. Preserve its visual intent while adapting the implementation to the project's content and the Design System.
 
 ---
 
@@ -83,14 +97,31 @@ Do not reproduce the reference image literally. Instead, preserve its visual int
 - The authentication form must be vertically centered.
 - Both columns occupy the full available content height.
 - Preserve generous whitespace around the form.
-- The authentication area must use the official Design System Card component. Do not replace it with custom containers.
+- The authentication area must use the official Design System Card component.
+- Do not replace the Card with custom containers.
 - The institutional panel uses the primary brand color.
 - The form area uses a neutral background.
-- The institutional panel is a supporting element. Its typography, graphics and visual emphasis must not compete with the authentication form.
+- The institutional panel is a supporting element and must not compete visually with the authentication form.
 
 ---
 
+## Adaptation Rules
 
+Do not change:
+
+- page composition;
+- column structure;
+- authentication flow;
+- component hierarchy.
+
+Adapt as needed:
+
+- titles;
+- descriptions;
+- illustrations;
+- branding.
+
+---
 
 ## Do
 

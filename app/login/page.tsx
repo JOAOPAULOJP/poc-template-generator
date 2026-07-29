@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import {
   Button,
+  Card,
   Checkbox,
   FlexContainer,
   InputPassword,
@@ -30,7 +31,8 @@ export default function LoginPage() {
 
   return (
     <AuthenticationLayout formLabel="Acesso à conta">
-      <form className="authentication-form" noValidate onSubmit={handleSubmit}>
+      <Card className="authentication-form">
+      <form noValidate onSubmit={handleSubmit}>
         <FlexContainer direction="col" gap="6">
           <FlexContainer direction="col" gap="2">
             <Typography variant="h1">Acesse sua conta</Typography>
@@ -99,6 +101,7 @@ export default function LoginPage() {
 
         </FlexContainer>
       </form>
+      </Card>
     </AuthenticationLayout>
   );
 }

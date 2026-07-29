@@ -1,13 +1,83 @@
 @import "tailwindcss";
 
-@theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
 body {
   background: var(--color-background-default);
   color: var(--color-text-default);
+}
+
+.backoffice-page {
+  min-height: 100vh;
+  background: var(--color-background-default);
+}
+
+.backoffice-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);
+  margin: 0 auto;
+  padding: var(--spacing-32) var(--spacing-48) var(--spacing-64);
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+}
+
+.patient-card,
+.report-card,
+.upload-card {
+  padding: var(--spacing-24);
+}
+
+.patient-icon,
+.document-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border-radius: var(--outline-radius-full);
+}
+
+.patient-icon {
+  padding: var(--spacing-12);
+  color: var(--color-text-primary-default);
+  background: var(--color-surface-primary-light);
+}
+
+.document-icon {
+  padding: var(--spacing-16);
+  color: var(--color-text-danger-default);
+  background: var(--color-surface-danger-light);
+}
+
+.report-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-24);
+}
+
+@media (max-width: 900px) {
+  .backoffice-content {
+    padding: var(--spacing-24) var(--spacing-32) var(--spacing-48);
+  }
+
+  .report-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .backoffice-content {
+    gap: var(--spacing-24);
+    padding: var(--spacing-16);
+  }
+
+  .patient-card,
+  .report-card,
+  .upload-card {
+    padding: var(--spacing-16);
+  }
 }
 
 .authentication-page {
