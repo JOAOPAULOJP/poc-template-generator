@@ -1,5 +1,9 @@
-import OrientationReportPage from "./components/orientation-report-page";
+import TopNavBar from "./components/top-nav-bar";
 
-export default function Home() {
-  return <OrientationReportPage />;
+export default function LandingPage() {
+  return (
+    <header>
+      <TopNavBar />
+    </header>
+  );
 }
