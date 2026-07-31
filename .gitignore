@@ -1,27 +1,7 @@
-# Dependências
 node_modules/
-
-# Next.js
 .next/
-out/
-
-# Turbopack
 .turbo/
-
-# TypeScript
+out/
 *.tsbuildinfo
-
-# Variáveis de ambiente
-.env
-.env.local
-.env.development.local
-.env.production.local
-
-# Logs
-*.log
-
-# macOS
+.env*
 .DS_Store
-
-# VS Code
-.vscode/
