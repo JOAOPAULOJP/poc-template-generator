@@ -14,14 +14,17 @@
 
 ## Visão geral
 
-O Admin UserBar é o componente responsável por apresentar o contexto de navegação e a identificação do usuário autenticado em aplicações administrativas.
+O Admin UserBar é o componente responsável por apresentar o contexto da página e as informações do usuário autenticado em aplicações administrativas.
 
-Ele reúne dois elementos principais:
+Sua composição pode incluir os seguintes elementos:
 
-- **Breadcrumb**, utilizado para indicar a localização atual do usuário dentro da aplicação.
+- **Breadcrumb** (opcional), utilizado para indicar a localização atual do usuário dentro da aplicação.
+- **Ferramentas globais**, como recursos de acessibilidade e preferências da aplicação, quando disponíveis.
 - **Menu do usuário**, contendo identificação, nível de acesso e ações relacionadas à conta.
 
-O componente deve estar presente em todas as páginas que utilizam o padrão Backoffice.
+O componente deve estar presente em todas as páginas que utilizam o Pattern Backoffice, compondo o cabeçalho da área de conteúdo.
+
+
 
 ---
 

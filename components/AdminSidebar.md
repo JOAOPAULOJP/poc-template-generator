@@ -20,6 +20,8 @@ Ele organiza os módulos do sistema em uma estrutura lateral persistente, permit
 
 O componente suporta estados aberto e fechado, além de variações visuais de tema.
 
+
+
 ---
 
 ## Quando usar

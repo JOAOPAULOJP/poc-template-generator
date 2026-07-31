@@ -89,6 +89,35 @@ Todo conteúdo da aplicação deve ser renderizado dentro de `PageContent`.
 
 ---
 
+# Composição da interface
+
+O Pattern Backoffice possui uma estrutura visual fixa, responsável por organizar a navegação e o conteúdo da aplicação.
+
+```text
+┌────────────────────────────────────────────┐
+│ GovBar                                     │
+├───────────────┬────────────────────────────┤
+│               │ Admin UserBar              │
+│               ├────────────────────────────┤
+│ AdminSidebar  │                            │
+│               │       PageContent          │
+│               │                            │
+└───────────────┴────────────────────────────┘
+```
+
+Cada área possui uma responsabilidade específica:
+
+- **GovBar:** apresenta a identidade institucional da aplicação.
+- **AdminSidebar:** disponibiliza a navegação principal entre os módulos do sistema.
+- **AdminUserBar:** apresenta o contexto da página e as informações do usuário autenticado.
+- **PageContent:** recebe o conteúdo específico de cada funcionalidade.
+
+A estrutura do Pattern Backoffice deve permanecer inalterada durante toda a aplicação.
+
+Apenas o conteúdo renderizado em **PageContent** deve variar de acordo com a funcionalidade implementada.
+
+---
+
 # Componentes obrigatórios
 
 A estrutura do Backoffice é composta pelos seguintes componentes.
@@ -147,13 +176,14 @@ Sempre implemente um Backoffice seguindo esta sequência.
 Sempre:
 
 - Utilizar LayoutProvider.
-- Utilizar template="backoffice".
+- Utilizar `template="backoffice"`.
 - Utilizar UiProvider.
 - Utilizar AppLayout.
 - Utilizar GovBar.
 - Utilizar AdminSideBar.
 - Utilizar AdminUserBar.
-- Renderizar as páginas em PageContent.
+- Preservar a estrutura do Pattern Backoffice.
+- Renderizar as páginas exclusivamente em `PageContent`.
 
 Nunca:
 
@@ -162,6 +192,7 @@ Nunca:
 - Remover GovBar.
 - Remover AdminSideBar.
 - Remover AdminUserBar.
+- Alterar a estrutura base do Pattern Backoffice.
 - Criar estruturas paralelas ao Backoffice.
 
 ---
@@ -181,7 +212,7 @@ Solicitação
 
 ↓
 
-Identificar que a aplicação utiliza o template Backoffice
+Identificar que a aplicação utiliza o Pattern Backoffice
 
 ↓
 
@@ -217,7 +248,11 @@ Criar PageContent
 
 ↓
 
-Somente então implementar a funcionalidade solicitada
+Preservar a estrutura do Pattern Backoffice
+
+↓
+
+Implementar a funcionalidade somente em PageContent
 ```
 
 ---
