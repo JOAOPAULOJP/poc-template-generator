@@ -1,9 +1,5 @@
-import TopNavBar from "./components/top-nav-bar";
+import BackofficeDashboard from "./components/backoffice-dashboard";
 
-export default function LandingPage() {
-  return (
-    <header>
-      <TopNavBar />
-    </header>
-  );
+export default function HomePage() {
+  return <BackofficeDashboard />;
 }

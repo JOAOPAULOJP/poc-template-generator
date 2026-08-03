@@ -7,9 +7,9 @@ import {
 
 const navigationItems = [
   { href: "#gestantes", label: "Para gestantes", current: true },
-  { href: "#servicos", label: "Serviços" },
-  { href: "#tecnologia", label: "Tecnologia" },
-  { href: "#duvidas", label: "Dúvidas" },
+  { href: "#servicos", label: "Serviços", current: false },
+  { href: "#tecnologia", label: "Tecnologia", current: false },
+  { href: "#duvidas", label: "Dúvidas", current: false },
 ] as const;
 
 export default function TopNavBar() {
