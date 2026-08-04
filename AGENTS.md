@@ -27,28 +27,6 @@ The generated code should be compatible with the development workflow adopted by
 
 ---
 
-# Documentation Workflow
-
-This repository contains a structured knowledge base for the Design System.
-
-Before implementing any feature, consult the documentation in the following order:
-
-1. `layout.md`
-   - Understand the available application templates and layout rules.
-
-2. `patterns/`
-   - Identify the appropriate application pattern and follow its implementation rules.
-
-3. `components/`
-   - Read the documentation of every component used by the selected pattern.
-   - Respect each component's purpose, usage guidelines and accessibility requirements.
-
-The documentation is the primary source of truth for implementation decisions.
-
-Do not rely only on model knowledge when documentation is available.
-
----
-
 # Technologies
 
 Always use:
@@ -81,16 +59,16 @@ Visual appearance is a consequence of correctly using the Design System.
 
 # Source of Truth
 
-The documentation available in this repository is the primary source of truth.
+The Design System is the single source of truth.
 
-When documentation exists:
+Before implementing any interface:
 
-1. Read the corresponding Pattern.
-2. Read the related component documentation.
-3. Verify that the component exists in the installed version of `@uigovpe/components`.
-4. Only then implement the solution.
+1. Check whether an equivalent component already exists.
+2. Read the available documentation.
+3. Reuse existing components.
+4. Only create a new component when there is no equivalent in the Design System.
 
-Never rely exclusively on prior knowledge when local documentation is available.
+Never recreate components that already exist.
 
 ---
 
@@ -236,13 +214,11 @@ Never build desktop-only layouts.
 
 When implementing any interface, use the following sources of information in this order:
 
-1. Local project documentation (`layout.md`, `patterns/`, `components/`).
-2. Installed Design System (`@uigovpe/components`).
+1. Local project files.
 3. Official Storybook.
 
 Official Storybook:
 https://ligadigital.pe.gov.br/storybook/index.html
-
 
 ---
 
