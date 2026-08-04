@@ -36,10 +36,12 @@ Before implementing any feature, consult the documentation in the following orde
 1. `layout.md`
    - Understand the available application templates and layout rules.
 
-2. `patterns/`
+2. `typography.md`
+
+3. `patterns/`
    - Identify the appropriate application pattern and follow its implementation rules.
 
-3. `components/`
+4. `components/`
    - Read the documentation of every component used by the selected pattern.
    - Respect each component's purpose, usage guidelines and accessibility requirements.
 
@@ -119,6 +121,7 @@ Always:
 - Respect color tokens.
 - Build responsive interfaces.
 - Build accessible interfaces.
+- Use the official Inter typography configured globally.
 
 Never:
 
@@ -236,7 +239,7 @@ Never build desktop-only layouts.
 
 When implementing any interface, use the following sources of information in this order:
 
-1. Local project documentation (`layout.md`, `patterns/`, `components/`).
+1. Local project documentation (`layout.md`,  `typography.md`, `patterns/`, `components/`).
 2. Installed Design System (`@uigovpe/components`).
 3. Official Storybook.
 
