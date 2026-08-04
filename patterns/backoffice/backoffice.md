@@ -49,6 +49,14 @@ Este template possui quatro responsabilidades principais:
 - Organizar as áreas fixas da interface.
 - Disponibilizar uma área para renderização das páginas.
 
+O GovBar faz parte da estrutura obrigatória do Pattern Backoffice.
+
+Além de representar a identidade institucional do Governo de Pernambuco, o GovBar centraliza funcionalidades globais da aplicação, como recursos de acessibilidade e preferências de interface.
+
+O AdminUserBar complementa o GovBar, apresentando o contexto da página e as informações do usuário autenticado.
+
+Esses componentes possuem responsabilidades distintas e complementares, não devendo ser removidos, substituídos ou utilizados de forma isolada.
+
 Este template não define o conteúdo das páginas.
 
 As páginas devem ser implementadas utilizando os patterns específicos definidos pelo Design System.
