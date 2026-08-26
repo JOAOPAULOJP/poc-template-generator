@@ -1,0 +1,50 @@
+.page { min-height: 100vh; background: var(--color-background-default); }
+.main { display: flex; flex-direction: column; gap: var(--spacing-32); width: min(100% - (var(--spacing-48) * 2), 1120px); margin: 0 auto; padding: var(--spacing-32) 0 var(--spacing-64); }
+.hero { display: flex; gap: var(--spacing-24); align-items: flex-start; }
+.heroIcon, .avcbIcon { display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; padding: var(--spacing-16); color: var(--color-text-primary-default); background: var(--color-surface-primary-light); border-radius: var(--outline-radius-full); }
+.hero :global(.ui-typography) { margin-bottom: var(--spacing-8); }
+.searchCard, .detailCard, .historyCard, .processCard { padding: var(--spacing-24); }
+.cardTitle { margin-bottom: var(--spacing-8); }
+.searchForm { display: flex; flex-direction: column; gap: var(--spacing-24); margin-top: var(--spacing-24); }
+.searchMethods { padding: 0; margin: 0; border: 0; }
+.radioGroup { display: flex; flex-wrap: wrap; gap: var(--spacing-16) var(--spacing-24); margin-top: var(--spacing-12); }
+.radioOption { display: inline-flex; gap: var(--spacing-8); align-items: center; }
+.radioOption label { cursor: pointer; }
+.searchInputRow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--spacing-16); align-items: end; }
+.feedback { width: 100%; }
+.results, .detail { display: flex; flex-direction: column; gap: var(--spacing-24); }
+.resultList { display: flex; flex-direction: column; gap: var(--spacing-16); }
+.processCardContent, .detailHeading, .avcbHeading { display: flex; gap: var(--spacing-16); align-items: flex-start; justify-content: space-between; }
+.processCardActions { display: flex; flex: 0 0 auto; gap: var(--spacing-12); align-items: center; }
+.detailHeading { align-items: center; }
+.detailGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--spacing-24); }
+.detailCard { display: flex; flex-direction: column; gap: var(--spacing-16); }
+.infoItem { display: flex; flex-direction: column; gap: var(--spacing-4); }
+.infoItem :global(.ui-typography) { margin: 0; }
+.avcbCard { background: var(--color-surface-primary-light); }
+.avcbHeading { justify-content: flex-start; align-items: center; }
+.historyCard { display: flex; flex-direction: column; gap: var(--spacing-24); }
+.timeline { display: flex; flex-direction: column; gap: var(--spacing-24); padding: 0; margin: 0; list-style: none; }
+.timelineItem { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--spacing-16); align-items: flex-start; }
+.timelineMarker { display: inline-flex; align-items: center; justify-content: center; width: var(--spacing-32); height: var(--spacing-32); color: var(--color-text-primary-default); background: var(--color-surface-primary-light); border-radius: var(--outline-radius-full); }
+.timelineItem :global(.ui-typography) { margin-bottom: var(--spacing-4); }
+.footer { padding: var(--spacing-24) var(--spacing-48); color: var(--color-text-bright); background: var(--color-surface-primary-strong); }
+.footerContent { display: flex; flex-wrap: wrap; gap: var(--spacing-16); justify-content: space-between; width: min(100%, 1120px); margin: 0 auto; }
+.footer :global(.ui-typography) { color: inherit; margin: 0; }
+
+@media (max-width: 900px) {
+  .main { width: min(100% - (var(--spacing-32) * 2), 1120px); padding-block: var(--spacing-24) var(--spacing-48); }
+}
+
+@media (max-width: 640px) {
+  .main { gap: var(--spacing-24); width: min(100% - (var(--spacing-16) * 2), 1120px); padding-block: var(--spacing-16) var(--spacing-32); }
+  .hero { gap: var(--spacing-16); }
+  .heroIcon { padding: var(--spacing-12); }
+  .searchCard, .detailCard, .historyCard, .processCard { padding: var(--spacing-16); }
+  .radioGroup { flex-direction: column; gap: var(--spacing-12); }
+  .searchInputRow, .detailGrid { grid-template-columns: 1fr; }
+  .searchInputRow :global(.p-button) { width: 100%; }
+  .processCardContent, .processCardActions, .detailHeading { flex-direction: column; align-items: stretch; }
+  .processCardActions :global(.p-button) { width: 100%; }
+  .footer { padding: var(--spacing-24) var(--spacing-16); }
+}

@@ -9,8 +9,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Backoffice | Farmácia Digital",
-  description: "Gestão de documentos e laudos de orientação farmacêutica.",
+  title: "Consultar processos de vistoria | Governo de Pernambuco",
+  description: "Consulta de processos de vistoria e análise contra incêndio.",
 };
 
 export default function RootLayout({

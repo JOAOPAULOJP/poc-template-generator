@@ -9,7 +9,7 @@ type ProvidersProps = {
 
 export default function Providers({ children }: ProvidersProps) {
   return (
-    <LayoutProvider breakpoint={900} template="backoffice">
+    <LayoutProvider breakpoint={900} template="landingpage">
       <UiProvider>{children}</UiProvider>
     </LayoutProvider>
   );
