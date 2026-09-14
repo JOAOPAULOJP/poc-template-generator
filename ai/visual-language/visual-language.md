@@ -228,3 +228,120 @@ More expressive experiences may use photography, illustration, graphic compositi
 Visual elements should remain consistent with the content, accessible, and subordinate to the user's primary task when functionality is the main goal.
 
 Avoid adding imagery or decorative elements only to fill empty space or make an interface appear more visually complex.
+
+## Adaptation to Context
+
+Visual decisions should adapt to the context of the experience while preserving the foundations of the Pernambuco Digital Standard.
+
+Consider the following factors:
+
+- Purpose of the experience
+- Primary user task
+- Type of content
+- Interaction complexity
+- Information density
+- Need for visual exploration
+- Product or project identity
+
+A service focused on completing a task should prioritize clarity, orientation, and efficiency.
+
+A content-oriented experience may use more space, stronger editorial hierarchy, and more visual variation.
+
+An institutional, exploratory, or campaign-oriented experience may use a higher level of visual expression when it supports its purpose.
+
+Context should influence the composition and level of expression, but should not override Design System foundations, accessibility, or established interaction patterns.
+
+## Expression by Context
+
+The visual expression of an interface should adapt to the purpose and context of the experience.
+
+The same Design System foundations can be composed with different levels of visual emphasis, density, color, imagery, and structure.
+
+### Transactional Services
+
+Services focused on completing a task should prioritize clarity, orientation, and efficiency.
+
+Use:
+
+- Clear page and section hierarchy
+- Focused content areas
+- Controlled visual density
+- Clear primary and secondary actions
+- Strong feedback and status communication
+- Limited decorative elements
+
+Avoid unnecessary visual complexity that could distract from the task.
+
+### Content and Documentation
+
+Experiences focused on reading, learning, or documentation can use a more editorial composition.
+
+Use:
+
+- Strong typographic hierarchy
+- Generous spacing
+- Clear content sections
+- Visual examples when they support understanding
+- Strong separation between major topics
+
+Prioritize readability and content structure over interaction density.
+
+### Institutional Experiences
+
+Institutional pages should communicate identity, purpose, and credibility.
+
+Use:
+
+- Strong institutional identity
+- Clear introductory hierarchy
+- Structured content sections
+- Appropriate use of imagery or graphic elements
+- Visual emphasis for key messages and calls to action
+
+The composition may be more expressive than a transactional service while maintaining the visual foundations of the Design System.
+
+### Exploratory Experiences
+
+Experiences focused on discovery, exploration, or interaction with large amounts of content may use a more expressive and flexible composition.
+
+Use:
+
+- Clear navigation and information hierarchy
+- Visual grouping that supports exploration
+- Appropriate use of imagery, illustration, or graphic elements
+- Strong visual cues to guide discovery
+- Product or project-specific identity when appropriate
+
+Visual expression should support exploration without compromising clarity or accessibility.
+
+### Campaigns and Experiences
+
+Campaign, launch, and event-oriented experiences may use a higher level of visual expression.
+
+Use:
+
+- Stronger visual compositions
+- More expressive color combinations
+- Larger imagery or illustrations
+- Distinctive section compositions
+- More prominent visual storytelling
+
+Expressive treatments should still support the purpose of the experience and maintain accessibility and consistency with the Design System foundations.
+
+## Composition Guidance
+
+Interfaces should be composed as a hierarchy of meaningful content and interaction areas, rather than as a collection of isolated components.
+
+Each page should establish:
+
+- A clear purpose
+- A clear visual starting point
+- A logical content hierarchy
+- Distinct relationships between sections
+- A clear primary action when applicable
+
+Components should be selected and combined according to the content, task, and context of the experience.
+
+The composition should create a coherent visual flow from the beginning of the page to the end.
+
+Avoid assembling pages by placing components independently without considering their relationship, hierarchy, spacing, and visual emphasis.
