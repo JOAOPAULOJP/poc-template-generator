@@ -1,5 +1,5 @@
 .page { min-height: 100vh; background: var(--color-background-default); }
-.main { display: flex; flex-direction: column; gap: var(--spacing-32); width: min(100% - (var(--spacing-48) * 2), 1120px); margin: 0 auto; padding: var(--spacing-32) 0 var(--spacing-64); }
+.main { display: flex; flex-direction: column; gap: var(--spacing-32); width: min(100% - (var(--spacing-48) * 2), 1216px); margin: 0 auto; padding: var(--spacing-32) 0 var(--spacing-64); }
 .hero { display: flex; gap: var(--spacing-24); align-items: flex-start; }
 .heroIcon, .avcbIcon { display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; padding: var(--spacing-16); color: var(--color-text-primary-default); background: var(--color-surface-primary-light); border-radius: var(--outline-radius-full); }
 .hero :global(.ui-typography) { margin-bottom: var(--spacing-8); }
@@ -7,7 +7,7 @@
 .cardTitle { margin-bottom: var(--spacing-8); }
 .searchForm { display: flex; flex-direction: column; gap: var(--spacing-24); margin-top: var(--spacing-24); }
 .searchMethods { padding: 0; margin: 0; border: 0; }
-.radioGroup { display: flex; flex-wrap: wrap; gap: var(--spacing-16) var(--spacing-24); margin-top: var(--spacing-12); }
+.radioGroup { display: flex; flex-direction: column; gap: var(--spacing-12); align-items: flex-start; margin-top: var(--spacing-12); }
 .radioOption { display: inline-flex; gap: var(--spacing-8); align-items: center; }
 .radioOption label { cursor: pointer; }
 .searchInputRow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--spacing-16); align-items: end; }

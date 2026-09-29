@@ -31,10 +31,12 @@ type Process = {
   statusDate: string;
   establishment: string;
   document: string;
+  lookupCpf: string;
   address: string;
   applicant: string;
   applicantDocument: string;
   avcb?: { number: string; validity: string };
+  pendingAction?: { label: string; feedback: string; icon: "payments" | "upload_file" | "visibility" };
   history: { date: string; title: string; detail: string }[];
 };
 
@@ -52,6 +54,7 @@ const processes: Process[] = [
     statusDate: "20 de agosto de 2026",
     establishment: "Centro Empresarial Boa Viagem",
     document: "12.345.678/0001-90",
+    lookupCpf: "934.567.890-12",
     address: "Av. Eng. Domingos Ferreira, 1580, Boa Viagem, Recife - PE",
     applicant: "Mariana Alves de Souza",
     applicantDocument: "***.456.789-**",
@@ -69,9 +72,11 @@ const processes: Process[] = [
     statusDate: "18 de agosto de 2026",
     establishment: "Centro Empresarial Boa Viagem - Torre Norte",
     document: "12.345.678/0001-90",
+    lookupCpf: "934.567.890-12",
     address: "Av. Eng. Domingos Ferreira, 1580, Boa Viagem, Recife - PE",
     applicant: "Mariana Alves de Souza",
     applicantDocument: "***.456.789-**",
+    pendingAction: { label: "Consultar exigência", feedback: "A exigência foi aberta para consulta.", icon: "visibility" },
     history: [
       { date: "18 ago. 2026", title: "Exigência emitida", detail: "É necessário apresentar o laudo de manutenção do sistema de hidrantes." },
       { date: "08 ago. 2026", title: "Documentação analisada", detail: "A análise inicial dos documentos foi concluída." },
@@ -84,21 +89,70 @@ const processes: Process[] = [
     statusDate: "15 de agosto de 2026",
     establishment: "Centro Empresarial Boa Viagem - Garagem",
     document: "12.345.678/0001-90",
+    lookupCpf: "934.567.890-12",
     address: "Av. Eng. Domingos Ferreira, 1580, Boa Viagem, Recife - PE",
     applicant: "Mariana Alves de Souza",
     applicantDocument: "***.456.789-**",
+    pendingAction: { label: "Enviar documentação", feedback: "O envio de documentação foi aberto.", icon: "upload_file" },
     history: [
       { date: "15 ago. 2026", title: "Documentação pendente", detail: "Envie a planta de segurança contra incêndio atualizada para continuidade da análise." },
       { date: "10 ago. 2026", title: "Processo protocolado", detail: "Sua solicitação foi recebida pelo Corpo de Bombeiros." },
     ],
   },
+  {
+    protocol: "2026.000389",
+    status: "Aguardando pagamento",
+    statusDate: "10 de agosto de 2026",
+    establishment: "Mercado Santa Clara",
+    document: "12.345.678/0001-90",
+    lookupCpf: "934.567.890-12",
+    address: "Rua da Aurora, 615, Boa Vista, Recife - PE",
+    applicant: "Mariana Alves de Souza",
+    applicantDocument: "***.456.789-**",
+    pendingAction: { label: "Consultar pagamento", feedback: "A consulta de pagamento foi aberta.", icon: "payments" },
+    history: [
+      { date: "10 ago. 2026", title: "Aguardando pagamento", detail: "A taxa de vistoria precisa ser paga para que o processo continue." },
+      { date: "09 ago. 2026", title: "Processo protocolado", detail: "Sua solicitação foi recebida pelo Corpo de Bombeiros." },
+    ],
+  },
+  {
+    protocol: "2026.000362",
+    status: "Em andamento",
+    statusDate: "7 de agosto de 2026",
+    establishment: "Mercado Santa Clara - Depósito",
+    document: "12.345.678/0001-90",
+    lookupCpf: "934.567.890-12",
+    address: "Rua da Aurora, 615, Boa Vista, Recife - PE",
+    applicant: "Mariana Alves de Souza",
+    applicantDocument: "***.456.789-**",
+    history: [
+      { date: "7 ago. 2026", title: "Análise em andamento", detail: "A documentação está sendo analisada pela equipe técnica." },
+      { date: "2 ago. 2026", title: "Processo protocolado", detail: "Sua solicitação foi recebida pelo Corpo de Bombeiros." },
+    ],
+  },
+  {
+    protocol: "2026.000341",
+    status: "Exigência cumprida",
+    statusDate: "4 de agosto de 2026",
+    establishment: "Mercado Santa Clara - Anexo",
+    document: "12.345.678/0001-90",
+    lookupCpf: "934.567.890-12",
+    address: "Rua da Aurora, 615, Boa Vista, Recife - PE",
+    applicant: "Mariana Alves de Souza",
+    applicantDocument: "***.456.789-**",
+    history: [
+      { date: "4 ago. 2026", title: "Exigência cumprida", detail: "Os documentos solicitados foram recebidos e seguirão para nova análise." },
+      { date: "29 jul. 2026", title: "Exigência emitida", detail: "Foi solicitada a atualização do laudo técnico." },
+      { date: "20 jul. 2026", title: "Processo protocolado", detail: "Sua solicitação foi recebida pelo Corpo de Bombeiros." },
+    ],
+  },
 ];
 
-const statusSeverity: Record<ProcessStatus, "success" | "warn" | "info"> = {
-  "Aguardando pagamento": "warn",
-  "Aguardando documentação": "warn",
+const statusSeverity: Record<ProcessStatus, "success" | "warning" | "info"> = {
+  "Aguardando pagamento": "warning",
+  "Aguardando documentação": "warning",
   "Em andamento": "info",
-  "Em exigência": "warn",
+  "Em exigência": "warning",
   "Exigência cumprida": "info",
   Deferido: "success",
 };
@@ -116,6 +170,18 @@ function InfoItem({ label, children }: { label: string; children: React.ReactNod
   );
 }
 
+function getStatusMessage(process: Process) {
+  if (process.status === "Deferido") {
+    return { severity: "success" as const, summary: "Processo deferido", text: "A vistoria foi aprovada. O AVCB está disponível para acesso abaixo." };
+  }
+
+  if (process.status === "Em andamento" || process.status === "Exigência cumprida") {
+    return { severity: "info" as const, summary: process.status, text: process.history[0].detail };
+  }
+
+  return { severity: "warn" as const, summary: "Este processo precisa de atenção", text: process.history[0].detail };
+}
+
 export default function FireSafetyProcessService() {
   const [method, setMethod] = useState<SearchMethod>("protocolo");
   const [query, setQuery] = useState("");
@@ -124,9 +190,11 @@ export default function FireSafetyProcessService() {
   const [hasSearched, setHasSearched] = useState(false);
   const [selectedProcess, setSelectedProcess] = useState<Process | null>(null);
   const [avcbFeedback, setAvcbFeedback] = useState("");
+  const [actionFeedback, setActionFeedback] = useState("");
 
   const selectedOption = searchOptions.find((option) => option.value === method)!;
-  const normalizedQuery = query.trim().toLocaleLowerCase("pt-BR");
+  const normalizeLookupValue = (value: string) => value.replaceAll(/[^a-zA-Z0-9À-ÿ]/g, "").toLocaleLowerCase("pt-BR");
+  const normalizedQuery = normalizeLookupValue(query);
   const filteredProcesses = processes.filter((process) => {
     const searchableValue =
       method === "protocolo"
@@ -134,10 +202,10 @@ export default function FireSafetyProcessService() {
         : method === "cnpj"
           ? process.document
           : method === "cpf"
-            ? process.applicantDocument
+            ? process.lookupCpf
             : process.establishment;
 
-    return searchableValue.toLocaleLowerCase("pt-BR").includes(normalizedQuery);
+    return normalizeLookupValue(searchableValue).includes(normalizedQuery);
   });
 
   const submitSearch = (event: FormEvent<HTMLFormElement>) => {
@@ -150,6 +218,7 @@ export default function FireSafetyProcessService() {
 
     setError("");
     setAvcbFeedback("");
+    setActionFeedback("");
     setSelectedProcess(null);
     setIsSearching(true);
     window.setTimeout(() => {
@@ -164,6 +233,7 @@ export default function FireSafetyProcessService() {
     setQuery("");
     setError("");
     setAvcbFeedback("");
+    setActionFeedback("");
   };
 
   const downloadAvcb = (process: Process) => {
@@ -187,6 +257,12 @@ export default function FireSafetyProcessService() {
     setAvcbFeedback("O download do AVCB foi iniciado.");
   };
 
+  const handleProcessAction = (process: Process) => {
+    if (process.pendingAction) {
+      setActionFeedback(process.pendingAction.feedback);
+    }
+  };
+
   return (
     <div className={styles.page}>
       <GovBar />
@@ -204,7 +280,9 @@ export default function FireSafetyProcessService() {
 
         <section aria-labelledby="search-title">
           <Card className={styles.searchCard} elevation="low">
-            <Typography variant="h2" size="xl" fontWeight="bold" className={styles.cardTitle} id="search-title">Consulte um processo</Typography>
+            <div id="search-title">
+              <Typography variant="h2" size="xl" fontWeight="bold" className={styles.cardTitle}>Consulte um processo</Typography>
+            </div>
             <Typography variant="p">Escolha um dado para localizar processos vinculados ao estabelecimento ou ao requerente.</Typography>
             <form onSubmit={submitSearch} noValidate className={styles.searchForm}>
               <fieldset className={styles.searchMethods}>
@@ -219,7 +297,7 @@ export default function FireSafetyProcessService() {
                 </div>
               </fieldset>
               <div className={styles.searchInputRow}>
-                <InputText inputId="process-search" label={selectedOption.label} placeholder={selectedOption.placeholder} supportText={error || selectedOption.help} value={query} aria-invalid={Boolean(error)} onChange={(event) => { setQuery(event.target.value); if (error) setError(""); }} />
+                <InputText inputId="process-search" label={selectedOption.label} placeholder={selectedOption.placeholder} supportText={error || selectedOption.help} value={query} invalid={Boolean(error)} aria-invalid={Boolean(error)} onChange={(event) => { setQuery(event.target.value); if (error) setError(""); }} />
                 <Button label={isSearching ? "Consultando..." : "Consultar processo"} icon="search" disabled={isSearching} type="submit" />
               </div>
             </form>
@@ -232,7 +310,9 @@ export default function FireSafetyProcessService() {
           <section aria-labelledby="results-title" className={styles.results}>
             <FlexContainer justify="between" align="center" wrap="wrap" gap="4">
               <div>
-                <Typography variant="h2" size="xl" fontWeight="bold" id="results-title">Processos encontrados</Typography>
+                <div id="results-title">
+                  <Typography variant="h2" size="xl" fontWeight="bold">Processos encontrados</Typography>
+                </div>
                 <Typography variant="p">{filteredProcesses.length ? `Encontramos ${filteredProcesses.length} ${filteredProcesses.length === 1 ? "processo" : "processos"} para sua consulta.` : "Não encontramos processos com esse dado."}</Typography>
               </div>
               <Button label="Nova consulta" outlined icon="refresh" onClick={startNewSearch} />
@@ -263,14 +343,17 @@ export default function FireSafetyProcessService() {
             <div className={styles.detailHeading}>
               <div>
                 <Typography variant="p" size="sm" fontWeight="medium">Processo {selectedProcess.protocol}</Typography>
-                <Typography variant="h2" size="xxl" fontWeight="bold" id="detail-title">{selectedProcess.establishment}</Typography>
+                <div id="detail-title">
+                  <Typography variant="h2" size="xxl" fontWeight="bold">{selectedProcess.establishment}</Typography>
+                </div>
               </div>
               <ProcessStatusTag status={selectedProcess.status} />
             </div>
 
-            <Message severity={selectedProcess.status === "Deferido" ? "success" : "warn"} summary={selectedProcess.status === "Deferido" ? "Processo deferido" : "Este processo precisa de atenção"} text={selectedProcess.status === "Deferido" ? "A vistoria foi aprovada. O AVCB está disponível para acesso abaixo." : selectedProcess.history[0].detail} />
+            <Message {...getStatusMessage(selectedProcess)} />
 
             {avcbFeedback && <Message severity="success" text={avcbFeedback} />}
+            {actionFeedback && <Message severity="info" text={actionFeedback} />}
 
             <div className={styles.detailGrid}>
               <Card className={styles.detailCard} elevation="low">
@@ -296,6 +379,13 @@ export default function FireSafetyProcessService() {
                   <InfoItem label="Documento">{selectedProcess.avcb.number}</InfoItem>
                   <InfoItem label="Validade">{selectedProcess.avcb.validity}</InfoItem>
                   <Button label="Baixar AVCB" icon="download" onClick={() => downloadAvcb(selectedProcess)} />
+                </Card>
+              )}
+              {selectedProcess.pendingAction && (
+                <Card className={styles.detailCard} elevation="low">
+                  <Typography variant="h3" size="lg" fontWeight="bold">Próxima ação</Typography>
+                  <Typography variant="p">{selectedProcess.history[0].detail}</Typography>
+                  <Button label={selectedProcess.pendingAction.label} outlined icon={selectedProcess.pendingAction.icon} onClick={() => handleProcessAction(selectedProcess)} />
                 </Card>
               )}
             </div>
