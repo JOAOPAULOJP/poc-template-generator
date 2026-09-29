@@ -33,20 +33,19 @@ This repository contains a structured knowledge base for the Design System.
 
 Before implementing any feature, consult the documentation in the following order:
 
-1. `layout.md`
+1. `visual-language/visual-language.md`
+
+   - Understand the visual language and composition principles of the Pernambuco Digital Standard.
+
+2. `guides/layout.md`
    - Understand the available application templates and layout rules.
 
-2. `typography.md`
-
-3. `visual-language/`
-
-   - Understand the visual principles and composition guidance.
-   - Adapt visual expression to the context of the experience.
+3. `guides/typography.md`
 
 4. `patterns/`
    - Identify the appropriate application pattern and follow its implementation rules.
 
-5. `components/`
+5. `knowledge/components/`
    - Read the documentation of every component used by the selected pattern.
    - Respect each component's purpose, usage guidelines and accessibility requirements.
 
@@ -244,12 +243,19 @@ Never build desktop-only layouts.
 
 When implementing any interface, use the following sources of information in this order:
 
-1. Local project documentation (`layout.md`, `typography.md`, `visual-language/`, `patterns/`, `components/`).
-2. Installed Design System (`@uigovpe/components`).
-3. Official Storybook.
+1. Local project documentation:
+   - `visual-language/visual-language.md`
+   - `guides/layout.md`
+   - `guides/typography.md`
+   - `patterns/`
+   - `knowledge/components/`
 
-Official Storybook:
-https://ligadigital.pe.gov.br/storybook/index.html
+2. Installed Design System:
+   - `@uigovpe/components`
+   - `@uigovpe/styles`
+
+3. Official Storybook.
+   - https://ligadigital.pe.gov.br/storybook/index.html
 
 
 ---

@@ -123,8 +123,22 @@ export default function FireSafetyProcessService() {
   const [isSearching, setIsSearching] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [selectedProcess, setSelectedProcess] = useState<Process | null>(null);
+  const [avcbFeedback, setAvcbFeedback] = useState("");
 
   const selectedOption = searchOptions.find((option) => option.value === method)!;
+  const normalizedQuery = query.trim().toLocaleLowerCase("pt-BR");
+  const filteredProcesses = processes.filter((process) => {
+    const searchableValue =
+      method === "protocolo"
+        ? process.protocol
+        : method === "cnpj"
+          ? process.document
+          : method === "cpf"
+            ? process.applicantDocument
+            : process.establishment;
+
+    return searchableValue.toLocaleLowerCase("pt-BR").includes(normalizedQuery);
+  });
 
   const submitSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -135,6 +149,7 @@ export default function FireSafetyProcessService() {
     }
 
     setError("");
+    setAvcbFeedback("");
     setSelectedProcess(null);
     setIsSearching(true);
     window.setTimeout(() => {
@@ -148,6 +163,28 @@ export default function FireSafetyProcessService() {
     setHasSearched(false);
     setQuery("");
     setError("");
+    setAvcbFeedback("");
+  };
+
+  const downloadAvcb = (process: Process) => {
+    if (!process.avcb) return;
+
+    const documentContent = [
+      "Atestado de Vistoria do Corpo de Bombeiros",
+      process.avcb.number,
+      `Processo: ${process.protocol}`,
+      `Estabelecimento: ${process.establishment}`,
+      `Validade: ${process.avcb.validity}`,
+    ].join("\n");
+    const file = new Blob([documentContent], { type: "text/plain;charset=utf-8" });
+    const fileUrl = URL.createObjectURL(file);
+    const link = document.createElement("a");
+
+    link.href = fileUrl;
+    link.download = `${process.avcb.number.replaceAll(/[^a-zA-Z0-9]/g, "-")}.txt`;
+    link.click();
+    URL.revokeObjectURL(fileUrl);
+    setAvcbFeedback("O download do AVCB foi iniciado.");
   };
 
   return (
@@ -196,12 +233,12 @@ export default function FireSafetyProcessService() {
             <FlexContainer justify="between" align="center" wrap="wrap" gap="4">
               <div>
                 <Typography variant="h2" size="xl" fontWeight="bold" id="results-title">Processos encontrados</Typography>
-                <Typography variant="p">Encontramos {processes.length} processos para sua consulta.</Typography>
+                <Typography variant="p">{filteredProcesses.length ? `Encontramos ${filteredProcesses.length} ${filteredProcesses.length === 1 ? "processo" : "processos"} para sua consulta.` : "Não encontramos processos com esse dado."}</Typography>
               </div>
               <Button label="Nova consulta" outlined icon="refresh" onClick={startNewSearch} />
             </FlexContainer>
-            <div className={styles.resultList}>
-              {processes.map((process) => (
+            {filteredProcesses.length ? <div className={styles.resultList}>
+              {filteredProcesses.map((process) => (
                 <Card className={styles.processCard} elevation="low" key={process.protocol}>
                   <div className={styles.processCardContent}>
                     <div>
@@ -216,7 +253,7 @@ export default function FireSafetyProcessService() {
                   </div>
                 </Card>
               ))}
-            </div>
+            </div> : <Message severity="info" summary="Nenhum processo encontrado" text="Revise o dado informado ou tente outra forma de consulta." />}
           </section>
         )}
 
@@ -232,6 +269,8 @@ export default function FireSafetyProcessService() {
             </div>
 
             <Message severity={selectedProcess.status === "Deferido" ? "success" : "warn"} summary={selectedProcess.status === "Deferido" ? "Processo deferido" : "Este processo precisa de atenção"} text={selectedProcess.status === "Deferido" ? "A vistoria foi aprovada. O AVCB está disponível para acesso abaixo." : selectedProcess.history[0].detail} />
+
+            {avcbFeedback && <Message severity="success" text={avcbFeedback} />}
 
             <div className={styles.detailGrid}>
               <Card className={styles.detailCard} elevation="low">
@@ -256,7 +295,7 @@ export default function FireSafetyProcessService() {
                   <div className={styles.avcbHeading}><span className={styles.avcbIcon} aria-hidden="true"><Icon icon="verified" /></span><Typography variant="h3" size="lg" fontWeight="bold">AVCB disponível</Typography></div>
                   <InfoItem label="Documento">{selectedProcess.avcb.number}</InfoItem>
                   <InfoItem label="Validade">{selectedProcess.avcb.validity}</InfoItem>
-                  <Button label="Acessar AVCB" icon="download" onClick={() => undefined} />
+                  <Button label="Baixar AVCB" icon="download" onClick={() => downloadAvcb(selectedProcess)} />
                 </Card>
               )}
             </div>
